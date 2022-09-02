@@ -55,6 +55,8 @@ resource "aws_route_table_association" "app_servers_rt_assoc" {
 
 resource "aws_security_group" "sg" {
   name = "${var.cluster_name}_sg"
+  description = "Allow SSH HTTP inbound connections"
+  vpc_id = aws_vpc.svc_vpc.id
 }
 
 resource "aws_security_group_rule" "allow_server_http_inbound" {
