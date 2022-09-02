@@ -60,6 +60,16 @@ resource "aws_security_group_rule" "allow_server_http_inbound" {
   cidr_blocks = local.all_ips
 }
 
+resource "aws_security_group_rule" "allow_server_ssh_inbound" {
+  type              = "ingress"
+  security_group_id = aws_security_group.sg.id
+
+  from_port   = var.server_ssh_port
+  to_port     = var.server_ssh_port
+  protocol    = local.tcp_protocol
+  cidr_blocks = local.all_ips
+}
+
 resource "aws_security_group_rule" "allow_all_http_outbound" {
   type              = "egress"
   security_group_id = aws_security_group.sg.id
