@@ -83,8 +83,8 @@ resource "aws_security_group_rule" "allow_all_http_outbound" {
   type              = "egress"
   security_group_id = aws_security_group.sg.id
 
-  from_port   = var.server_port
-  to_port     = var.server_port
+  from_port   = 0
+  to_port     = 0
   protocol    = local.tcp_protocol
   cidr_blocks = local.all_ips
 }
