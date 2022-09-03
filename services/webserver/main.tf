@@ -3,7 +3,7 @@ terraform {
 }
 
 resource "aws_instance" "app_server" {
-  ami = "ami-085284d24fe829cd0"
+  image_id = "ami-0c55b159cbfafe1f0"
   instance_type = "t2.nano"
   key_name = "cvora_access_key"
 
