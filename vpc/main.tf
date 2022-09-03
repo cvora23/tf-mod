@@ -63,8 +63,18 @@ resource "aws_security_group_rule" "allow_server_http_inbound" {
   type              = "ingress"
   security_group_id = aws_security_group.sg.id
 
-  from_port   = var.server_port
-  to_port     = var.server_port
+  from_port   = var.server_http_port
+  to_port     = var.server_http_port
+  protocol    = local.tcp_protocol
+  cidr_blocks = local.all_ips
+}
+
+resource "aws_security_group_rule" "allow_server_https_inbound" {
+  type              = "ingress"
+  security_group_id = aws_security_group.sg.id
+
+  from_port   = var.server_https_port
+  to_port     = var.server_https_port
   protocol    = local.tcp_protocol
   cidr_blocks = local.all_ips
 }

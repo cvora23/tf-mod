@@ -18,10 +18,16 @@ variable "availability_zone" {
   type        = string
 }
 
-variable "server_port" {
+variable "server_http_port" {
   description = "The port the server will use for HTTP requests"
   type        = number
   default     = 80
+}
+
+variable "server_https_port" {
+  description = "The port the server will use for HTTPS requests"
+  type        = number
+  default     = 443
 }
 
 variable "server_ssh_port" {
