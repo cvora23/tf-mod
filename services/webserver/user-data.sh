@@ -7,22 +7,22 @@
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
 # Add Docker repository to APT sources
-sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" -y
 
 # Update the packages
-sudo apt-get update
+sudo apt-get update -y
 
 # Making sure installing Docker from Repo instead of default Ubuntu 16.04 repo
-sudo apt-cache policy docker-ce
+sudo apt-cache policy docker-ce -y
 
 # Install Docker Community Edition
 sudo apt-get install -y docker-ce
 
 # Pull the lastest Nginx image
-sudo docker pull nginx:latest
+sudo docker pull nginx:latest -y
 
 # Run the nginx container on port 80
-sudo docker run -d -p 80:80 --name nginx nginx
+sudo docker run -d -p 80:80 --name nginx nginx -y
 
 
 #cat > index.html <<EOF
