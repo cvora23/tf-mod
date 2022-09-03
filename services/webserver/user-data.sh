@@ -21,7 +21,7 @@ apt-get install -y docker-ce
 docker pull nginx:latest
 
 # Run the nginx container on port 8080
-docker run -d -p 8080:8080 --name nginx nginx
+docker run -d -p 80:80 --name nginx nginx
 
 
 ##!/bin/bash

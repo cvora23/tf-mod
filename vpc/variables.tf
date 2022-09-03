@@ -21,7 +21,7 @@ variable "availability_zone" {
 variable "server_port" {
   description = "The port the server will use for HTTP requests"
   type        = number
-  default     = 8080
+  default     = 80
 }
 
 variable "server_ssh_port" {
