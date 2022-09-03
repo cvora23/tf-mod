@@ -3,8 +3,8 @@ terraform {
 }
 
 resource "aws_instance" "app_server" {
-  ami = "ami-0c55b159cbfafe1f0"
-  instance_type = "t2.nano"
+  ami = "ami-02f3416038bdb17fb"
+  instance_type = "t2.micro"
   key_name = "cvora_access_key"
 
   user_data = data.template_file.user_data.rendered
