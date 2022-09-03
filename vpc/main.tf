@@ -95,7 +95,7 @@ resource "aws_security_group_rule" "allow_all_http_outbound" {
 
   from_port   = 0
   to_port     = 0
-  protocol    = local.tcp_protocol
+  protocol    = "-1"
   cidr_blocks = local.all_ips
 }
 
