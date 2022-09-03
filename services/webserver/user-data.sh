@@ -1,29 +1,17 @@
-#!/bin/bash
+#! /bin/bash
 
-# Install scripts for docker nginx container
-# Reference: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04
-
-# Adds the GPG key for the official Docker repository to the system
+sudo apt update
+sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-
-# Add Docker repository to APT sources
-sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-
-# Update the packages
-sudo apt-get update
-
-# Making sure installing Docker from Repo instead of default Ubuntu 16.04 repo
-sudo apt-cache policy docker-ce
-
-# Install Docker Community Edition
-sudo apt-get install -y docker-ce
-
-# Pull the lastest Nginx image
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu  $(lsb_release -cs)  stable"
+sudo apt update
+sudo apt-get install docker-ce
+sudo systemctl start docker
+sudo systemctl enable docker
+sudo groupadd docker
+sudo usermod -aG docker ubuntu
 sudo docker pull nginx:latest
-
-# Run the nginx container on port 80
-sudo docker run -d -p 80:80 --name nginx nginx
-
+sudo docker run --name mynginx1 -p 80:80 -d nginx
 
 #cat > index.html <<EOF
 #<h1>Hello, World</h1>
