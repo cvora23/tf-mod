@@ -16,7 +16,6 @@ function old_install_nginx
   sudo docker run --name mynginx1 -p 80:80 -d nginx
 }
 
-
 function install_nginx
 {
   SOFTWARE="nginx"
@@ -29,4 +28,4 @@ function install_nginx
   sudo systemctl reload $SOFTWARE
 }
 
-install_nginx
+#install_nginx
