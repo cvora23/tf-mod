@@ -31,8 +31,6 @@ data "terraform_remote_state" "vpc" {
   backend = "local"
 
   config = {
-    bucket = var.vpc_remote_state_bucket
-    key    = var.vpc_remote_state_key
-    region = "us-east-2"
+    path = var.vpc_local_state_path
   }
 }
