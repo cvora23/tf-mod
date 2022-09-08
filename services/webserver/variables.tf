@@ -8,6 +8,11 @@ variable "cluster_name" {
   type        = string
 }
 
+variable "vpc_local_state_file_path" {
+  description = "The path for the vpc's local state"
+  type        = string
+}
+
 variable "vpc_remote_state_bucket" {
   description = "The name of the S3 bucket for the vpc's remote state"
   type        = string
