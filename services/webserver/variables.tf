@@ -8,7 +8,7 @@ variable "cluster_name" {
   type        = string
 }
 
-variable "vpc_local_state_file_path" {
+variable "vpc_local_state_path" {
   description = "The path for the vpc's local state"
   type        = string
 }
