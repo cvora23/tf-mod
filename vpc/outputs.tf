@@ -17,3 +17,8 @@ output "app_servers_subnet_id" {
   value       = aws_subnet.app_servers_subnet.id
   description = "The ID of the Subnet configured for the app servers"
 }
+
+output "app_servers_rt_id" {
+  value       = aws_route_table.app_servers_rt.id
+  description = "The ID of the Route Table configured for the app servers"
+}

@@ -70,25 +70,11 @@ resource "aws_route_table_association" "gwlbe_rt_assoc" {
 ########################################## GW Load Balancer EndPoint ##################################################
 
 ############################################### Secured Application Servers ##########################################
-# Create the Route Table for Secured Application Servers
-resource "aws_route_table" "app_rt" {
-  vpc_id = data.terraform_remote_state.vpc.outputs.vpc_id
-  tags  = {
-    Name = "${var.cluster_name}_app_rt"
-  }
-} # end resource
-
 //# Adding route for Secured Application Servers
 resource "aws_route" "app_route" {
-  route_table_id        = aws_route_table.app_rt.id
+  route_table_id        = data.terraform_remote_state.vpc.outputs.app_servers_rt_id
   destination_cidr_block = "0.0.0.0/0"
   vpc_endpoint_id = aws_vpc_endpoint.gwlbe.id
-} # end resource
-
-# Associate the Route Table with the Subnet for Secured Application Servers
-resource "aws_route_table_association" "app_rt_assoc" {
-  subnet_id      = data.terraform_remote_state.vpc.outputs.app_servers_subnet_id
-  route_table_id = aws_route_table.app_rt.id
 } # end resource
 ############################################### Secured Application Servers ##########################################
 
