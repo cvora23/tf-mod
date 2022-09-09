@@ -32,6 +32,27 @@ resource "aws_subnet" "app_servers_subnet" {
   }
 } # end resource
 
+# Create the Route Table for Application Servers
+resource "aws_route_table" "app_servers_rt" {
+  vpc_id = aws_vpc.svc_vpc.id
+  tags  = {
+    Name = "${var.cluster_name}_app_servers_rt"
+  }
+} # end resource
+
+//# Adding route for Application Servers
+resource "aws_route" "app_servers_route" {
+  route_table_id = aws_route_table.app_servers_rt.id
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id = aws_internet_gateway.igw.id
+} # end resource
+
+# Associate the Route Table with the Subnet for Application Servers
+resource "aws_route_table_association" "app_servers_rt_assoc" {
+  subnet_id      = aws_subnet.app_servers_subnet.id
+  route_table_id = aws_route_table.app_servers_rt.id
+} # end resource
+
 resource "aws_security_group" "sg" {
   name = "${var.cluster_name}_sg"
   description = "Allow SSH HTTP inbound connections"
