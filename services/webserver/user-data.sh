@@ -29,3 +29,7 @@ function install_nginx
 }
 
 #install_nginx
+#"user_id": "e1f2449130bb11ed88747ee35cb25f4c"
+#"cusomter_id": "e059d56d30bb11ed88747ee35cb25f4c"
+#"app_id": "abfae00330cd11ed88747ee35cb25f4c"
+#"fqdn": "app-93b06fe8-dde0-432e-a701-30746673fd95.maple.demo.ubyon.io"
