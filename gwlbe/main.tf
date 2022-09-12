@@ -72,7 +72,7 @@ resource "aws_route_table_association" "gwlbe_rt_assoc" {
 ############################################### Secured Application Servers ##########################################
 //# Adding route for Secured Application Servers
 resource "aws_route" "app_route" {
-  route_table_id        = data.terraform_remote_state.vpc.outputs.app_servers_rt_id
+  route_table_id        = data.terraform_remote_state.webserver.outputs.app_servers_rt_id
   destination_cidr_block = "0.0.0.0/0"
   vpc_endpoint_id = aws_vpc_endpoint.gwlbe.id
 } # end resource
@@ -83,6 +83,14 @@ data "terraform_remote_state" "vpc" {
 
   config = {
     path = var.vpc_local_state_path
+  }
+}
+
+data "terraform_remote_state" "webserver" {
+  backend = "local"
+
+  config = {
+    path = var.webserver_local_state_path
   }
 }
 

@@ -18,6 +18,11 @@ variable "vpc_local_state_path" {
   type        = string
 }
 
+variable "webserver_local_state_path" {
+  description = "The path for the webserver's local state"
+  type        = string
+}
+
 variable "gwlbe_cidr_block" {
   description = "CIDR Block reserved for GW Load Balancer Endpoint"
   type        = string
