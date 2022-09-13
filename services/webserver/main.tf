@@ -23,7 +23,7 @@ resource "aws_instance" "app_server" {
   user_data = data.template_file.user_data.rendered
 
   vpc_security_group_ids = [ data.terraform_remote_state.vpc.outputs.vpc_security_group_id ]
-  subnet_id = aws_subnet.app_servers_subnet[count.index].id
+  subnet_id = aws_subnet.app_servers_subnet[*].id[count.index]
   associate_public_ip_address = true
   tags = {
     Name = "${var.cluster_name}_app_server"
@@ -40,7 +40,7 @@ resource "aws_route_table" "app_servers_rt" {
 
 # Associate the Route Table with the Subnet for Application Servers
 resource "aws_route_table_association" "app_servers_rt_assoc" {
-  subnet_id      = aws_subnet.app_servers_subnet[count.index].id
+  subnet_id = aws_subnet.app_servers_subnet[*].id[count.index]
   route_table_id = aws_route_table.app_servers_rt.id
 } # end resource
 
