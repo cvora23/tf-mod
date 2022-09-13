@@ -23,6 +23,11 @@ variable "instance_type" {
   type        = string
 }
 
+variable "instance_netnum" {
+  description = "EC2 Instances netnum for cidrsubnet"
+  type        = number
+}
+
 # ---------------------------------------------------------------------------------------------------------------------
 # OPTIONAL PARAMETERS
 # These parameters have reasonable defaults.
