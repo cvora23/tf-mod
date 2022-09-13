@@ -37,3 +37,13 @@ variable "ubyon_gwlbe_svc_name" {
   description = "Ubyon GW Load Balancer Endpoint Service Name"
   type        = string
 }
+
+variable "gwlbe_netnum" {
+  description = "GWLBE netnum for cidrsubnet"
+  type        = number
+}
+
+variable "webserver_netnum" {
+  description = "EC2 Instances netnum for cidrsubnet"
+  type        = number
+}

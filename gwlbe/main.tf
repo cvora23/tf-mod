@@ -5,11 +5,11 @@ terraform {
 # create the Subnet
 resource "aws_subnet" "gwlbe_subnet" {
   vpc_id                  = data.terraform_remote_state.vpc.outputs.vpc_id
-  cidr_block              = var.gwlbe_cidr_block
+  cidr_block              = cidrsubnet(data.terraform_remote_state.vpc.outputs.vpc_cidr_block,8 ,var.gwlbe_netnum)
   map_public_ip_on_launch = local.map_public_ip
   availability_zone       = var.availability_zone
   tags = {
-    Name ="${var.cluster_name}_gwlbe_subnet"
+    Name ="${var.cluster_name}_gwlbe_subnet_${var.gwlbe_netnum}"
   }
 } # end resource
 
@@ -36,7 +36,7 @@ resource "aws_route_table" "igw_rt" {
 //# Adding route for Internet GW that routes traffic destined for the secured app servers to the Gateway Load Balancer endpoint
 resource "aws_route" "igw_route" {
   route_table_id        = aws_route_table.igw_rt.id
-  destination_cidr_block = var.app_cidr_block
+  destination_cidr_block = cidrsubnet(data.terraform_remote_state.vpc.outputs.vpc_cidr_block,8 ,var.webserver_netnum)
   vpc_endpoint_id = aws_vpc_endpoint.gwlbe.id
 } # end resource
 
