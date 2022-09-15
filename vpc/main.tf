@@ -21,6 +21,18 @@ resource "aws_internet_gateway" "igw" {
   }
 } # end resource
 
+# Create the Route Table for Internet GW
+resource "aws_route_table" "igw_rt" {
+  vpc_id          = aws_vpc.svc_vpc.id
+  tags  = {
+    Name = "${var.cluster_name}_igw_rt"
+  }
+} # end resource
+
+resource "aws_route_table_association" "igw_rt_assoc" {
+  gateway_id     = aws_internet_gateway.igw.id
+  route_table_id = aws_route_table.igw_rt.id
+}
 
 resource "aws_security_group" "sg" {
   name = "${var.cluster_name}_sg"

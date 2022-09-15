@@ -26,24 +26,13 @@ resource "aws_vpc_endpoint" "gwlbe" {
 
 ########################################## Internet GW ############################################################
 # Create the Route Table for Internet GW
-resource "aws_route_table" "igw_rt" {
-  vpc_id                  = data.terraform_remote_state.vpc.outputs.vpc_id
-  tags  = {
-    Name = "${var.cluster_name}_igw_rt"
-  }
-} # end resource
-
 //# Adding route for Internet GW that routes traffic destined for the secured app servers to the Gateway Load Balancer endpoint
 resource "aws_route" "igw_route" {
-  route_table_id        = aws_route_table.igw_rt.id
+  route_table_id        = data.terraform_remote_state.vpc.outputs.igw_rt_id
   destination_cidr_block = cidrsubnet(data.terraform_remote_state.vpc.outputs.vpc_cidr_block,8 ,var.webserver_netnum)
   vpc_endpoint_id = aws_vpc_endpoint.gwlbe.id
 } # end resource
 
-resource "aws_route_table_association" "igw_rt_assoc" {
-  gateway_id     = data.terraform_remote_state.vpc.outputs.igw_id
-  route_table_id = aws_route_table.igw_rt.id
-}
 ########################################## Internet GW ############################################################
 
 ########################################## GW Load Balancer EndPoint ##################################################
